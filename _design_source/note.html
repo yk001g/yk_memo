@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Skills を教材づくりに使う — yk_memo</title>
+<meta name="description" content="毎月の講座資料を Skill として切り出し、更新コストを半分以下にする。1ヶ月運用してみたワークフローの記録。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#F7F2E5;
+    --bg-soft:#EFEAD8;
+    --ink:#2C2C2A;
+    --ink-2:#6B6B68;
+    --rule:#E0DBC8;
+    --accent:#1d73be;
+    --accent-warm:#fbd212;
+
+    --fs-body:17px;
+    --lh-body:1.85;
+    --measure:680px;
+    --measure-wide:840px;
+
+    --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Noto Sans Mono CJK JP", monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-size:var(--fs-body);
+    line-height:var(--lh-body);
+    font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  a{
+    color:var(--accent);
+    text-decoration:none;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition: color .15s ease, text-decoration-color .15s ease;
+  }
+  a:hover{ text-decoration:underline; }
+  ::selection{ background: var(--accent-warm); color: var(--ink); }
+
+  /* -------- Layout containers -------- */
+  .wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .measure{
+    max-width: var(--measure);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* -------- Header (same as Home/Notes) -------- */
+  .site-header{ padding: 24px 0; }
+  .site-header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 24px;
+    max-width: 720px;
+  }
+  .logo{
+    font-weight:500;
+    font-size:16px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .logo:hover{ text-decoration:none; color:var(--ink); }
+  .nav{ display:flex; gap: 22px; font-size:14px; }
+  .nav a{ color:var(--ink-2); }
+  .nav a:hover{ color:var(--accent); text-decoration:none; }
+  .nav a.current{
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .nav a.current:hover{ color: var(--ink); }
+
+  /* -------- Article header -------- */
+  article{
+    padding: 56px 0 0;
+  }
+  .article-meta-top{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--ink-2);
+    margin: 0 0 16px 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .article-meta-top .tags{
+    display:flex;
+    gap: 10px;
+    color: var(--accent);
+  }
+  .article-meta-top .tags .tag::before{
+    content:"#";
+    opacity: 0.6;
+    margin-right: 1px;
+  }
+
+  .article-title{
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px 0;
+    color: var(--ink);
+    text-wrap: pretty;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .article-lede{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0 0 64px 0;
+    text-wrap: pretty;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* -------- Article body — typesetting matters most -------- */
+  .article-body{
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .article-body > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+  .article-body > .wide { max-width: var(--measure-wide); }
+  .article-body > figure.wide { max-width: var(--measure-wide); }
+
+  .article-body p{
+    margin: 0 0 1.2em 0;
+  }
+  .article-body p:last-child{ margin-bottom: 0; }
+
+  .article-body h2{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    margin: 56px auto 16px;
+    color: var(--ink);
+  }
+  .article-body h3{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 40px auto 12px;
+    color: var(--ink);
+  }
+
+  .article-body a{
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .article-body a:hover{
+    text-decoration-color: var(--accent-warm);
+    text-decoration-thickness: 2px;
+  }
+
+  .article-body strong{
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .article-body code{
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--bg-soft);
+    padding: 2px 6px;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+
+  .article-body blockquote{
+    margin: 24px auto;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-2);
+    font-style: normal;
+  }
+  .article-body blockquote p{ margin: 0 0 0.8em 0; }
+  .article-body blockquote p:last-child{ margin: 0; }
+
+  .article-body pre{
+    margin: 24px auto;
+    padding: 20px;
+    background: var(--bg-soft);
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .article-body pre code{
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    word-break: normal;
+  }
+
+  .article-body ul,
+  .article-body ol{
+    padding-left: 24px;
+    margin: 0 auto 1.2em;
+    max-width: var(--measure);
+  }
+  .article-body ul{ list-style: disc; }
+  .article-body ol{ list-style: decimal; }
+  .article-body li{
+    margin: 6px 0;
+    padding-left: 4px;
+  }
+  .article-body li::marker{
+    color: var(--ink-2);
+  }
+
+  .article-body hr{
+    border: 0;
+    border-top: 1px solid var(--rule);
+    width: 100px;
+    margin: 48px auto;
+  }
+
+  .article-body figure{
+    margin: 32px auto;
+  }
+  .article-body figure img,
+  .article-body figure .placeholder{
+    display:block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .article-body figcaption{
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--ink-2);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* Hand-drawn illustration placeholder */
+  .placeholder{
+    border: 1px solid var(--rule);
+    background:
+      repeating-linear-gradient(
+        135deg,
+        transparent 0 9px,
+        rgba(44,44,42,0.035) 9px 10px
+      );
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--ink-2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    border-radius: 2px;
+  }
+
+  /* -------- Article footer -------- */
+  .article-end{
+    margin-top: 64px;
+    max-width: var(--measure);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pub-meta{
+    font-size: 12px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.02em;
+  }
+  .back-link{
+    font-size: 14px;
+  }
+  .back-link a{ color: var(--accent); }
+
+  .related{
+    margin-top: 48px;
+    max-width: var(--measure);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .related h2{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    margin: 0 0 18px 0;
+    letter-spacing: 0.02em;
+  }
+  .related ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .related li{
+    padding: 10px 0;
+  }
+  .related a{
+    display:flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--ink);
+  }
+  .related a:hover{ text-decoration: none; }
+  .related .rel-title{
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    transition: color .15s ease;
+  }
+  .related a:hover .rel-title{ color: var(--accent); }
+  .related .rel-date{
+    font-size: 12px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* -------- Footer (same as Home/Notes) -------- */
+  .site-footer{
+    margin-top: 96px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .site-footer .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .site-footer .links{ display:flex; gap: 18px; }
+  .site-footer .links a{ color: var(--ink-2); }
+  .site-footer .links a:hover{ color: var(--accent); text-decoration:none; }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 640px){
+    .site-header{ padding: 20px 0; }
+    .site-header .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .nav{ gap: 16px; flex-wrap: wrap; }
+
+    article{ padding-top: 32px; }
+    .article-title{ font-size: 26px; }
+    .article-lede{ font-size: 17px; margin-bottom: 48px; }
+
+    .article-body h2{ margin-top: 44px; font-size: 20px; }
+    .article-body h3{ margin-top: 32px; }
+    .article-body pre{ padding: 16px; font-size: 13px; }
+
+    .site-footer{ margin-top: 72px; padding: 24px 0 36px; }
+    .site-footer .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">yk_memo</a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      <a href="notes.html" class="current">Notes</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#lessons">Lessons</a>
+      <a href="index.html#salon">Salon</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article>
+    <header class="wrap">
+      <div class="measure">
+        <div class="article-meta-top">
+          <time class="article-date" datetime="2026-04-02">2026.04.02</time>
+          <span class="tags">
+            <span class="tag">道具</span>
+            <span class="tag">教育</span>
+          </span>
+        </div>
+        <h1 class="article-title">Claude Skills を教材づくりに使う</h1>
+        <p class="article-lede">毎月の講座資料を Skill として切り出し、更新コストを半分以下にする。1ヶ月運用してみたワークフローの記録。</p>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <div class="article-body">
+
+        <p>片倉台のスマホサロンと市民講座を合わせると、毎月 3 〜 4 種類の配布資料を書いている。テーマは少しずつ違うのだけれど、骨格は驚くほど似ていて、いつも同じところでつまずき、同じところを書き直している。</p>
+
+        <p>今月から、その骨格を Claude の <a href="https://www.anthropic.com/news/skills" rel="noopener">Skills</a> として切り出してみることにした。結論から書くと、資料 1 本あたりの作業時間が体感で半分以下になった。完成度の高さよりも、書き始めるまでの心理的なコストが下がったのが大きい。</p>
+
+        <p>このメモは、その 1 ヶ月の記録と、来月以降に調整したい点の整理。</p>
+
+        <h2>これまでの講座資料づくりの問題</h2>
+
+        <p>毎月の講座資料は、だいたい次のような工程で作っていた。</p>
+
+        <ul>
+          <li>テーマを決める（参加者の質問やニュースから拾う）</li>
+          <li>90 分ぶんの構成案を書く</li>
+          <li>A4 1 〜 2 枚の配布プリントを書く</li>
+          <li>プリントを読み上げ用台本に直す</li>
+          <li>当日の質問メモ用のフォームを準備する</li>
+        </ul>
+
+        <p>このうち、最初の <strong>テーマを決める〜構成案を書く</strong> までが、いつも一番重い。書き始めると進むのに、白紙に向かって構成を決めるのが、月のいちばんしんどい仕事だった。</p>
+
+        <p>後半 3 つはほとんど機械的なのに、そこに辿り着く前に体力を使い切ってしまうことが多かった。</p>
+
+        <h2>Skill として切り出す</h2>
+
+        <h3>設計の考え方</h3>
+
+        <p>Anthropic の <a href="https://docs.anthropic.com/" rel="noopener">公式ドキュメント</a> を読みつつ、最初に作ったのは <code>lesson-plan</code> という Skill。「目的」「参加者像」「持ち時間」を入力すると、90 分の講座構成案を出してくれる、ただそれだけのもの。</p>
+
+        <p>大事だったのは、Skill のなかに <strong>シニア向け講座の制約</strong> を書き込んでおいたこと。文字は 14pt 以上。1 スライドに 1 メッセージ。専門用語は定義してから使う。「アプリ」と「サービス」を混ぜない。こうした制約は毎月同じなのに、毎月思い出しながら書いていた。Skill にしておけば、思い出さなくて済む。</p>
+
+        <blockquote>
+          <p>シニアにとっての「わかりにくい」は、難易度よりも一貫性の問題だ。先週の言い方と今週の言い方が違う、それだけで講座は途切れる。</p>
+        </blockquote>
+
+        <p>Skill はこの種の <em>暗黙知</em> を、文章として残しておく場所として使うのがいいと思っている。</p>
+
+        <h3>実際のディレクトリ構成</h3>
+
+        <p>1 ヶ月運用したあとの、いまのディレクトリはだいたいこんな具合になっている。</p>
+
+        <pre><code>skills/
+├── lesson-plan/
+│   ├── SKILL.md
+│   ├── examples/
+│   │   ├── 2026-04-ai-search.md
+│   │   └── 2026-03-photo-share.md
+│   └── constraints/
+│       └── senior-audience.md
+├── handout-jp/
+│   ├── SKILL.md
+│   └── templates/
+│       └── a4-2page.md
+└── salon-notes/
+    └── SKILL.md</code></pre>
+
+        <p>各 Skill のルートには <code>SKILL.md</code> を 1 枚置き、参照させたい例や制約は別ファイルに切り出す。<code>examples/</code> に過去の講座を 2 〜 3 本入れておくと、トーンが安定する。</p>
+
+        <figure>
+          <div class="placeholder" role="img" aria-label="ワークフロー図のプレースホルダ">
+            illustration · workflow diagram
+          </div>
+          <figcaption>テーマ決定から配布までの工程と、各工程に対応する Skill の対応図（差し替え予定）。</figcaption>
+        </figure>
+
+        <h2>1 ヶ月運用してみた</h2>
+
+        <p>4 月の 4 本の講座すべてで、この組み合わせを使った。実感として一番効いたのは、<strong>白紙に向かう時間が減ったこと</strong>。Skill が骨格を出してくれるので、そこに肉付けする作業から始められる。</p>
+
+        <p>一方で、Skill が出すものを <em>そのまま使った回</em> はゼロ。毎回どこかを書き直している。これは悪いことではなく、書き直しながら自分の意図を確かめている感じがある。</p>
+
+        <blockquote>
+          <p>Skill は「出力を担う道具」ではなく「自分の判断を引き出す道具」として使うのが、いまのところ自分には合っている。</p>
+        </blockquote>
+
+        <p>参加者の反応も、いつもと同じか、少しよかった気がする。資料の <strong>骨組みが安定した</strong> ことで、当日のアドリブに余裕が出たのだと思う。</p>
+
+        <h2>これからの調整ポイント</h2>
+
+        <ul>
+          <li>講座後の <strong>ふりかえりメモ</strong> を Skill から自動生成する流れを作る</li>
+          <li>シニア向けの言い換え辞書を <code>constraints/</code> に蓄積する</li>
+          <li>配布プリントの版面（A4 縦）テンプレを Skill に同梱する</li>
+          <li>来月の市民講座で取り上げる Antigravity 用の Skill を新規に書き起こす</li>
+        </ul>
+
+        <p>来月もまた、月末にこのページを更新するつもり。続報は <a href="notes.html">Notes</a> から。</p>
+
+      </div>
+
+      <footer class="article-end">
+        <p class="pub-meta">2026.04.02 公開 ／ 2026.04.20 更新</p>
+        <p class="back-link"><a href="notes.html">← Notes に戻る</a></p>
+
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">関連する記事</h2>
+          <ul>
+            <li>
+              <a href="#">
+                <span class="rel-title">スマホサロンで「AI に聞いてみる」を覚えた日</span>
+                <span class="rel-date">2026.04.18</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="rel-title">notebooklm-mcp-cli を導入してみた</span>
+                <span class="rel-date">2026.03.21</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="rel-title">AI と競争しない、という選択</span>
+                <span class="rel-date">2026.01.15</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </footer>
+    </div>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>© 2026 yk_memo</div>
+    <nav class="links" aria-label="外部リンク">
+      <a href="#">X</a>
+      <a href="#">GitHub</a>
+      <a href="#">Obsidian Publish</a>
+      <a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

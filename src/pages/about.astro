@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — yk_memo"
+  description="yk_memo について。シニアとAIの間に立つ、地域での教育とClaude Skills開発の活動紹介。"
+>
+
+<main>
+
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="page-title">About</h1>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p>シニアとAIの間に立っています。片倉台で月に一度のスマホサロンを開き、ボランティア教育プログラムを運営しています。</p>
+          <p>生成AIやAIエージェントの動向を追い、自分で手を動かして講座を作り、Claude Skills を公開しています。</p>
+          <span class="emph">AIと競争せず、自分のベストで使う。</span>
+          <p>そんな付き合い方を、地域で実践しています。</p>
+        </div>
+        <div class="mascot" role="img" aria-label="マスコットイラスト（後で差し替え）">
+          mascot<br/>200×200
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="body">
+    <div class="wrap">
+      <div class="measure">
+
+        <h2>いまやっていること</h2>
+
+        <h3>スマホ・わいわいサロン</h3>
+        <p>（ここに、片倉台での月次サロンの説明が入ります。何年続けているか、何人くらい参加するか、どんな雰囲気か。2〜3 文で。）</p>
+
+        <h3>Claude Skills の開発・公開</h3>
+        <p>（Claude Skills を作り始めた経緯、現在 18 種類ほど公開していること、GitHub で誰でも使えること。2〜3 文で。）</p>
+        <p class="section-link"><a href="/skills/">→ Skills を見る</a></p>
+
+        <h3>シニア向け市民講座</h3>
+        <p>（八王子の生涯学習センターでの講座実績、NotebookLM・Gemini・Antigravity などのテーマ。2〜3 文で。）</p>
+        <p class="section-link"><a href="/lessons/">→ Lessons を見る</a></p>
+
+        <h3>ボランティア教育プログラム</h3>
+        <p>（複数の学校で運営している、ボランティア生徒さん向けの英語学習プログラム。何校・何年続けているか。2〜3 文で。）</p>
+
+        <h2>考えていること</h2>
+
+        <p>（AIリテラシー教育について考えていること。シニアの方々と接する中で気づいたこと。3〜5 文で。）</p>
+
+        <p>（「AI と競争しない、自分のベストで使う」という哲学について。なぜそう考えるようになったか、現場でどう実践しているか。3〜5 文で。）</p>
+
+        <p>（道具との付き合い方、これからやりたいこと、など。3〜5 文で。）</p>
+
+        <blockquote>
+          <p>（ここに、yk_memo としての中心的な信念を 1〜2 文で）</p>
+        </blockquote>
+
+        <h2>これまで</h2>
+
+        <ul class="career">
+          <li>
+            <span class="year">2024 — 現在</span>
+            <span class="what">tetumemo / yk_memo として活動</span>
+          </li>
+          <li>
+            <span class="year">○○○○ —</span>
+            <span class="what">地域でのスマホ教室運営</span>
+          </li>
+          <li>
+            <span class="year">○○○○ —</span>
+            <span class="what">ボランティア教育プログラム発足</span>
+          </li>
+          <li>
+            <span class="year">○○○○ —</span>
+            <span class="what">前職、活動の前史</span>
+          </li>
+        </ul>
+
+        <h2>連絡先</h2>
+
+        <dl class="contact">
+          <dt>メール</dt>
+          <dd><a href="mailto:hello@example.com">hello@example.com</a></dd>
+
+          <dt>X</dt>
+          <dd><a href="https://x.com/yk_memo" rel="noopener">@yk_memo</a></dd>
+
+          <dt>GitHub</dt>
+          <dd><a href="https://github.com/yk_memo" rel="noopener">github.com/yk_memo</a></dd>
+
+          <dt>Obsidian</dt>
+          <dd><a href="https://publish.obsidian.md/yk_memo" rel="noopener">publish.obsidian.md/yk_memo</a></dd>
+
+          <dt>Newsletter</dt>
+          <dd>月に一度配信中（<a href="/#newsletter">ホームから登録できます</a>）</dd>
+        </dl>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</BaseLayout>
+
+<style>
+  /* ---- Page head ---- */
+  .page-head { padding: 56px 0 48px; }
+
+  .page-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  /* ---- Hero ---- */
+  .hero { padding-bottom: 80px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .hero-text {
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-text);
+    letter-spacing: 0.003em;
+    text-wrap: pretty;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .hero-text p { margin: 0 0 1.1em 0; }
+  .hero-text p:last-child { margin-bottom: 0; }
+  .hero-text .emph {
+    font-weight: 500;
+    display: block;
+    margin-top: 1.2em;
+  }
+
+  .mascot {
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 9px,
+      rgba(44,44,42,0.035) 9px 10px
+    );
+  }
+
+  /* ---- Body sections ---- */
+  .body {
+    font-size: 17px;
+    line-height: var(--lh-article);
+    color: var(--color-text);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .body h2 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    margin: 80px 0 24px;
+    color: var(--color-text);
+  }
+  .body h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 40px 0 12px;
+    color: var(--color-text);
+  }
+
+  .body p { margin: 0 0 1.2em 0; }
+  .body p:last-child { margin-bottom: 0; }
+
+  .body a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .body a:hover {
+    text-decoration-color: var(--color-accent-warm);
+    text-decoration-thickness: 2px;
+  }
+
+  .body strong { font-weight: 600; color: var(--color-text); }
+
+  .body blockquote {
+    margin: 32px 0;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--color-accent);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+  .body blockquote p { margin: 0; }
+
+  .section-link { margin-top: 8px; font-size: 14px; }
+  .section-link a { color: var(--color-accent); text-decoration: none; }
+  .section-link a:hover { text-decoration: underline; }
+
+  /* ---- Career list ---- */
+  .career {
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .career li {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .career li:first-child { border-top: 1px solid var(--color-border); }
+
+  .career .year {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    padding-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .career .what { color: var(--color-text); }
+
+  /* ---- Contact list ---- */
+  .contact {
+    margin: 8px 0 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 12px 24px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .contact dt {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    padding-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .contact dd { margin: 0; color: var(--color-text); }
+  .contact dd a { color: var(--color-accent); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .page-head { padding: 32px 0 32px; }
+    .page-title { font-size: 28px; }
+
+    .hero { padding-bottom: 56px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .mascot { width: 140px; height: 140px; order: -1; }
+    .hero-text { font-size: 21px; }
+
+    .body h2 { margin-top: 64px; font-size: 20px; }
+    .body h3 { margin-top: 32px; }
+
+    .career li { grid-template-columns: 88px 1fr; gap: 12px; font-size: 15px; }
+    .contact { grid-template-columns: 100px 1fr; gap: 10px 16px; font-size: 15px; }
+  }
+</style>

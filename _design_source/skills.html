@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude Skills — yk_memo</title>
+<meta name="description" content="個人や教育の現場で使える Claude Skills のカタログ。GitHub で公開中。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#F7F2E5;
+    --bg-soft:#EFEAD8;
+    --bg-hover:#FAF5E8;
+    --ink:#2C2C2A;
+    --ink-2:#6B6B68;
+    --rule:#E0DBC8;
+    --accent:#1d73be;
+    --accent-warm:#fbd212;
+
+    --fs-body:17px;
+    --lh-body:1.75;
+    --measure:720px;
+
+    --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-size:var(--fs-body);
+    line-height:var(--lh-body);
+    font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  a{
+    color:var(--accent);
+    text-decoration:none;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition: color .15s ease, background-color .15s ease, border-color .15s ease;
+  }
+  a:hover{ text-decoration:underline; }
+  ::selection{ background: var(--accent-warm); color: var(--ink); }
+
+  .wrap{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* -------- Header -------- */
+  .site-header{ padding: 24px 0; }
+  .site-header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 24px;
+  }
+  .logo{
+    font-weight:500;
+    font-size:16px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .logo:hover{ text-decoration:none; color:var(--ink); }
+  .nav{ display:flex; gap: 22px; font-size:14px; }
+  .nav a{ color:var(--ink-2); }
+  .nav a:hover{ color:var(--accent); text-decoration:none; }
+  .nav a.current{ color: var(--ink); font-weight: 600; }
+  .nav a.current:hover{ color: var(--ink); }
+
+  /* -------- Page title -------- */
+  .page-head{ padding: 56px 0 0; }
+  .page-title{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px 0;
+    color: var(--ink);
+  }
+  .page-desc{
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 600px;
+  }
+
+  /* -------- Category filter -------- */
+  .cat-filter{
+    margin-top: 32px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 18px 22px;
+    font-size: 14px;
+    list-style: none;
+    padding: 0;
+  }
+  .cat-filter a{
+    color: var(--ink-2);
+    font-weight: 400;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .cat-filter a:hover{
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .cat-filter a.active{
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+  .cat-filter a.active:hover{ color: var(--ink); }
+
+  /* -------- Category groups -------- */
+  .cat-group{ }
+  .cat-name{
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 64px 0 24px;
+    letter-spacing: -0.005em;
+  }
+  .cat-group:first-of-type .cat-name{ margin-top: 48px; }
+
+  /* -------- Skills grid -------- */
+  .skills{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    row-gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .skill{
+    display:flex;
+  }
+  .skill-link{
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px 28px;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    transition: border-color .15s ease, background-color .15s ease;
+  }
+  .skill-link:hover{
+    text-decoration: none;
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+  .skill-name{
+    font-family: var(--font-mono);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 8px 0;
+    letter-spacing: -0.005em;
+    word-break: break-all;
+    line-height: 1.4;
+  }
+  .skill-desc{
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin: 0 0 16px 0;
+    flex: 1;
+  }
+  .skill-foot{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+  }
+  .skill-cat{
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  .skill-cat::before{
+    content:"";
+    display:inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    vertical-align: 2px;
+  }
+  .skill-gh{
+    width: 14px; height: 14px;
+    color: var(--ink-2);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .skill-link:hover .skill-gh{ color: var(--accent); opacity: 1; }
+
+  /* -------- Page-end CTA -------- */
+  .all-on-gh{
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .all-on-gh a{
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* -------- Footer -------- */
+  .site-footer{
+    margin-top: 96px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .site-footer .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .site-footer .links{ display:flex; gap: 18px; }
+  .site-footer .links a{ color: var(--ink-2); }
+  .site-footer .links a:hover{ color: var(--accent); text-decoration:none; }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 640px){
+    .site-header{ padding: 20px 0; }
+    .site-header .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .nav{ gap: 16px; flex-wrap: wrap; }
+
+    .page-head{ padding-top: 32px; }
+    .page-title{ font-size: 28px; }
+    .cat-filter{ gap: 14px 18px; margin-top: 24px; }
+    .cat-name{ margin: 48px 0 18px; font-size: 20px; }
+
+    .skills{
+      grid-template-columns: 1fr;
+      row-gap: 14px;
+    }
+    .skill-link{ padding: 20px 22px; }
+
+    .site-footer{ margin-top: 72px; padding: 24px 0 36px; }
+    .site-footer .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">yk_memo</a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      <a href="notes.html">Notes</a>
+      <a href="skills.html" class="current" aria-current="page">Skills</a>
+      <a href="index.html#lessons">Lessons</a>
+      <a href="index.html#salon">Salon</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="page-title">Claude Skills</h1>
+      <p class="page-desc">個人や教育の現場で使える Claude Skills を作っています。Markdown の設計図と Python / Node.js のスクリプトで動く、再利用可能な作業手順です。すべて GitHub で公開しています。</p>
+
+      <ul class="cat-filter" role="list" aria-label="カテゴリで絞り込む">
+        <li><a href="#" class="active" data-cat="all">すべて</a></li>
+        <li><a href="#" data-cat="lesson">講座教材</a></li>
+        <li><a href="#" data-cat="doc">文書生成</a></li>
+        <li><a href="#" data-cat="slide">スライド生成</a></li>
+        <li><a href="#" data-cat="image">画像処理</a></li>
+        <li><a href="#" data-cat="other">その他</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="skills-list">
+    <div class="wrap">
+
+      <!-- SVG icon symbol for GitHub -->
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-gh" viewBox="0 0 16 16">
+          <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </symbol>
+      </svg>
+
+      <!-- 講座教材 -->
+      <section class="cat-group" data-cat="lesson">
+        <h2 class="cat-name">講座教材</h2>
+        <ul class="skills">
+          <li class="skill" data-cat="lesson">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">salon-onetheme-lesson-kit</h3>
+              <p class="skill-desc">毎月のスマホサロン用、1 テーマ完結の 90 分構成キット。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">講座教材</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="lesson">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">salon-qa-generator</h3>
+              <p class="skill-desc">サロンの質問票から、参加者向け配布資料と講師用解説を同時生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">講座教材</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="lesson">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">weekly-report</h3>
+              <p class="skill-desc">1 週間の活動メモから、上司提出用の週次報告書テキストを生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">講座教材</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 文書生成 -->
+      <section class="cat-group" data-cat="doc">
+        <h2 class="cat-name">文書生成</h2>
+        <ul class="skills">
+          <li class="skill" data-cat="doc">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">smartphone-handout-docx</h3>
+              <p class="skill-desc">シニア向けスマホ教室の A4 配布資料（.docx）を作成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">文書生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="doc">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">seo-article-writer</h3>
+              <p class="skill-desc">AI 検索時代に対応した SEO 記事の構成案・本文執筆を支援。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">文書生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="doc">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">ai-news-weekly-digest</h3>
+              <p class="skill-desc">今週の AI ニュースを Web 検索で調査し、20 件一覧とベスト 3 解説をまとめる。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">文書生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- スライド生成 -->
+      <section class="cat-group" data-cat="slide">
+        <h2 class="cat-name">スライド生成</h2>
+        <ul class="skills">
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">tetumemo-slide-v2</h3>
+              <p class="skill-desc">記事やドキュメントをセミナー向けプレゼン資料（.pptx）に自動変換。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">senior-friendly-slide</h3>
+              <p class="skill-desc">高齢者向けに最適化された PowerPoint スライドを作成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">batch-slide-creator</h3>
+              <p class="skill-desc">30 枚以上の大量スライドをバッチ分割方式で作成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">pptx-speaker-notes</h3>
+              <p class="skill-desc">既存の PowerPoint ファイルに発表者ノートを自動生成して追加。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">qa-pptx-generator</h3>
+              <p class="skill-desc">4 択問題と解説スライドを 1 つの PPTX ファイルにまとめて生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="slide">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">html-slide-generator</h3>
+              <p class="skill-desc">Markdown や記事 URL から 16:9 の HTML スライドを生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">スライド生成</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 画像処理 -->
+      <section class="cat-group" data-cat="image">
+        <h2 class="cat-name">画像処理</h2>
+        <ul class="skills">
+          <li class="skill" data-cat="image">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">line-stamp-processor</h3>
+              <p class="skill-desc">AI で生成した 9 コマ画像を LINE スタンプ申請用に自動加工。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">画像処理</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="image">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">infographic-prompt-generator-v2</h3>
+              <p class="skill-desc">X スレッドや記事を画像生成 AI 用の YAML プロンプトに変換。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">画像処理</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- その他 -->
+      <section class="cat-group" data-cat="other">
+        <h2 class="cat-name">その他</h2>
+        <ul class="skills">
+          <li class="skill" data-cat="other">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">yonkoma-manga-generator</h3>
+              <p class="skill-desc">ブログ記事から 4 コマ漫画のシナリオと画像生成プロンプトを生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">その他</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="other">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">tm-thread-post-generator</h3>
+              <p class="skill-desc">X の tetumemo スタイルに基づいた高エンゲージメント・スレッドを生成。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">その他</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="other">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">article-to-x-article-generator-v8</h3>
+              <p class="skill-desc">ニュースレターやブログ記事を X の Article 形式に最適化。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">その他</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+          <li class="skill" data-cat="other">
+            <a class="skill-link" href="#" rel="noopener">
+              <h3 class="skill-name">ai-constitution-personas</h3>
+              <p class="skill-desc">Anthropic の憲法に基づく 10 人の AI ペルソナで多様な視点から相談。</p>
+              <div class="skill-foot">
+                <span class="skill-cat">その他</span>
+                <svg class="skill-gh"><use href="#i-gh"/></svg>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <p class="all-on-gh">
+        すべての Skills は GitHub で公開しています ・ <a href="https://github.com/" rel="noopener">github.com/yk_memo →</a>
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>© 2026 yk_memo</div>
+    <nav class="links" aria-label="外部リンク">
+      <a href="#">X</a>
+      <a href="#">GitHub</a>
+      <a href="#">Obsidian Publish</a>
+      <a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const links = document.querySelectorAll('.cat-filter a');
+    const groups = document.querySelectorAll('.cat-group');
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        links.forEach(x => x.classList.toggle('active', x === a));
+        const key = a.dataset.cat;
+        groups.forEach(g => {
+          g.style.display = (key === 'all' || g.dataset.cat === key) ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

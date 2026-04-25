@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '' } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Notes',   href: '/notes/' },
+  { label: 'Skills',  href: '/skills/' },
+  { label: 'Lessons', href: '/lessons/' },
+  { label: 'Salon',   href: '/salon/' },
+  { label: 'About',   href: '/about/' },
+] as const;
+
+function isCurrent(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href);
+}
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo">yk_memo</a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      {navItems.map(({ label, href }) => (
+        <a
+          href={href}
+          class={isCurrent(href) ? 'current' : undefined}
+          aria-current={isCurrent(href) ? 'page' : undefined}
+        >{label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<slot />
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>© 2026 yk_memo</div>
+    <nav class="links" aria-label="外部リンク">
+      <a href="#">X</a>
+      <a href="#">GitHub</a>
+      <a href="#">Obsidian Publish</a>
+      <a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

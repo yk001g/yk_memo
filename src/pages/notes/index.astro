@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Notes — yk_memo"
+  description="yk_memo のエッセイ・記事一覧。AI・教育・暮らしについての文章。"
+>
+
+<main>
+
+  <section class="page-head">
+    <div class="wrap">
+      <h1 class="page-title">Notes</h1>
+      <p class="page-desc">AI・教育・暮らしについての文章。<br/>最近のものから順に。</p>
+
+      <ul class="tag-filter" role="list" aria-label="タグで絞り込む">
+        <li><a href="#" class="active" data-tag="all">すべて</a></li>
+        <li><a href="#" data-tag="ai">AI</a></li>
+        <li><a href="#" data-tag="education">教育</a></li>
+        <li><a href="#" data-tag="tools">道具</a></li>
+        <li><a href="#" data-tag="obsidian">Obsidian</a></li>
+        <li><a href="#" data-tag="other">その他</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="notes-list">
+    <div class="wrap">
+
+      <section class="year-group">
+        <h2 class="year">2026</h2>
+        <ul class="articles">
+          <li>
+            <a class="article-link" href="/notes/salon-ai-hajimete/">
+              <h3 class="article-title">スマホサロンで「AIに聞いてみる」を覚えた日</h3>
+              <p class="article-summary">70 代の参加者が初めて生成 AI に質問を投げた朝の記録。</p>
+              <div class="article-meta">
+                <span class="article-date">2026.04.18</span>
+                <span class="article-tags">
+                  <span class="tag">教育</span>
+                  <span class="tag">AI</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="/notes/claude-skills-kyozai/">
+              <h3 class="article-title">Claude Skills を教材づくりに使う</h3>
+              <p class="article-summary">毎月の講座資料を Skill として切り出し、更新コストを半分以下に。</p>
+              <div class="article-meta">
+                <span class="article-date">2026.04.02</span>
+                <span class="article-tags">
+                  <span class="tag">道具</span>
+                  <span class="tag">教育</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="/notes/notebooklm-mcp-cli/">
+              <h3 class="article-title">notebooklm-mcp-cli を導入してみた</h3>
+              <p class="article-summary">NotebookLM を MCP 経由で呼び出す構成。自分のノートと講座資料をつなぐ実験。</p>
+              <div class="article-meta">
+                <span class="article-date">2026.03.21</span>
+                <span class="article-tags">
+                  <span class="tag">道具</span>
+                  <span class="tag">Obsidian</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="#">
+              <h3 class="article-title">Gemini で音楽を作る 5 分間</h3>
+              <p class="article-summary">市民講座のハンズオンとして実装した 5 つのテーマ。</p>
+              <div class="article-meta">
+                <span class="article-date">2026.02.28</span>
+                <span class="article-tags">
+                  <span class="tag">AI</span>
+                  <span class="tag">教育</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="#">
+              <h3 class="article-title">AI と競争しない、という選択</h3>
+              <p class="article-summary">AI リテラシー教育の現場で考えていることのメモ。</p>
+              <div class="article-meta">
+                <span class="article-date">2026.01.15</span>
+                <span class="article-tags">
+                  <span class="tag">AI</span>
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="year-group">
+        <h2 class="year">2025</h2>
+        <ul class="articles">
+          <li>
+            <a class="article-link" href="#">
+              <h3 class="article-title">ボランティア生徒さんの一年を振り返って</h3>
+              <p class="article-summary">3 校で続けてきた英語学習プログラムの記録。</p>
+              <div class="article-meta">
+                <span class="article-date">2025.12.20</span>
+                <span class="article-tags">
+                  <span class="tag">教育</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="#">
+              <h3 class="article-title">Obsidian を使い始めて 3 年</h3>
+              <p class="article-summary">ノート術というより、思考の流れを残す装置として使う話。</p>
+              <div class="article-meta">
+                <span class="article-date">2025.11.04</span>
+                <span class="article-tags">
+                  <span class="tag">Obsidian</span>
+                  <span class="tag">道具</span>
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="article-link" href="#">
+              <h3 class="article-title">シニアにとって「調べる」とはどういうことか</h3>
+              <p class="article-summary">検索のリテラシーが世代でこれほど違う、という発見の記録。</p>
+              <div class="article-meta">
+                <span class="article-date">2025.10.10</span>
+                <span class="article-tags">
+                  <span class="tag">教育</span>
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+
+</BaseLayout>
+
+<style>
+  /* ---- Page head ---- */
+  .page-head { padding: 56px 0 0; }
+
+  .page-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px 0;
+    color: var(--color-text);
+  }
+
+  .page-desc {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* ---- Tag filter ---- */
+  .tag-filter {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 22px;
+    font-size: 14px;
+    list-style: none;
+    padding: 0;
+  }
+  .tag-filter a {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .tag-filter a:hover { color: var(--color-accent); text-decoration: none; }
+  .tag-filter a.active { color: var(--color-text); border-bottom-color: var(--color-text); }
+  .tag-filter a.active:hover { color: var(--color-text); }
+
+  /* ---- Year groups ---- */
+  .notes-list { padding-top: 24px; }
+
+  .year {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 64px 0 24px;
+    letter-spacing: -0.005em;
+    font-variant-numeric: tabular-nums;
+  }
+  .year-group:first-child .year { margin-top: 40px; }
+
+  /* ---- Article list ---- */
+  .articles { list-style: none; margin: 0; padding: 0; }
+  .articles li { padding: 16px 0; border-top: 1px solid var(--color-border); }
+  .articles li:last-child { border-bottom: 1px solid var(--color-border); }
+
+  .article-link { display: block; color: var(--color-text); }
+  .article-link:hover { text-decoration: none; }
+
+  .article-title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 0 0 6px 0;
+    transition: color .15s ease;
+  }
+  .article-link:hover .article-title { color: var(--color-accent); }
+
+  .article-summary {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin: 0 0 8px 0;
+    max-width: 620px;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    flex-wrap: wrap;
+  }
+
+  .article-date {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .article-tags { display: flex; gap: 10px; }
+  .article-tags .tag { color: var(--color-accent); }
+  .article-tags .tag::before {
+    content: "#";
+    opacity: 0.6;
+    margin-right: 1px;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 640px) {
+    .page-head { padding-top: 32px; }
+    .page-title { font-size: 28px; }
+    .tag-filter { gap: 14px 18px; margin-top: 32px; }
+    .year { margin: 48px 0 18px; font-size: 20px; }
+    .article-meta { gap: 10px; }
+  }
+</style>
+
+<script>
+  (function () {
+    const tagLinks = document.querySelectorAll<HTMLAnchorElement>('.tag-filter a');
+    const items = document.querySelectorAll<HTMLLIElement>('.articles li');
+
+    const TAG_MAP: Record<string, string[]> = {
+      ai: ['AI'],
+      education: ['教育'],
+      tools: ['道具'],
+      obsidian: ['Obsidian'],
+      other: [],
+    };
+    const KNOWN = ['AI', '教育', '道具', 'Obsidian'];
+
+    function tagsOf(li: HTMLLIElement): string[] {
+      return Array.from(li.querySelectorAll('.tag')).map((t) => t.textContent?.trim() ?? '');
+    }
+
+    tagLinks.forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        tagLinks.forEach((x) => x.classList.toggle('active', x === a));
+        const key = a.dataset.tag ?? 'all';
+
+        items.forEach((li) => {
+          const tags = tagsOf(li);
+          let show = true;
+          if (key === 'all') show = true;
+          else if (key === 'other') show = tags.every((t) => !KNOWN.includes(t));
+          else show = tags.some((t) => TAG_MAP[key]?.includes(t) ?? false);
+          li.style.display = show ? '' : 'none';
+        });
+
+        document.querySelectorAll<HTMLElement>('.year-group').forEach((g) => {
+          const visible = Array.from(g.querySelectorAll<HTMLLIElement>('.articles li')).some(
+            (li) => li.style.display !== 'none'
+          );
+          g.style.display = visible ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>

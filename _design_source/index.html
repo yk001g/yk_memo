@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>yk_memo — シニアとAIの間に立つ</title>
+<meta name="description" content="日本のAIリテラシー教育者 yk_memo の個人サイト。シニア向けスマートフォン教室、Claude Skills 開発、地域コミュニティ運営。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#F7F2E5;
+    --ink:#2C2C2A;
+    --ink-2:#6B6B68;
+    --rule:#E0DBC8;
+    --accent:#1d73be;
+    --accent-warm:#fbd212;
+
+    --fs-body:17px;
+    --lh-body:1.75;
+    --measure:720px;
+
+    --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-size:var(--fs-body);
+    line-height:var(--lh-body);
+    font-feature-settings:"palt" 1;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  a{
+    color:var(--accent);
+    text-decoration:none;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition: color .15s ease, background-color .15s ease;
+  }
+  a:hover{
+    text-decoration:underline;
+  }
+
+  ::selection{
+    background: var(--accent-warm);
+    color: var(--ink);
+  }
+
+  .wrap{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* -------- Header -------- */
+  .site-header{
+    padding: 24px 0;
+  }
+  .site-header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 24px;
+  }
+  .logo{
+    font-weight:500;
+    font-size:16px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .logo:hover{ text-decoration:none; color:var(--ink); }
+  .nav{
+    display:flex;
+    gap: 22px;
+    font-size:14px;
+  }
+  .nav a{
+    color:var(--ink-2);
+  }
+  .nav a:hover{
+    color:var(--accent);
+    text-decoration:none;
+  }
+
+  /* -------- Hero -------- */
+  .hero{
+    padding: 56px 0 24px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1fr 160px;
+    gap: 40px;
+    align-items:start;
+  }
+  .hero-text{
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--ink);
+    letter-spacing: 0.005em;
+    text-wrap: pretty;
+  }
+  .hero-text p{
+    margin: 0 0 1.1em 0;
+  }
+  .hero-text p:last-child{ margin-bottom:0; }
+  .hero-text .emph{
+    font-weight: 500;
+    display:block;
+    margin-top: 1.2em;
+  }
+  .mascot{
+    width: 160px;
+    height: 160px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--ink-2);
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 11px;
+    line-height:1.5;
+    text-align:center;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        transparent 0 8px,
+        rgba(44,44,42,0.035) 8px 9px
+      );
+  }
+
+  /* -------- Section -------- */
+  section.block{
+    padding-top: 96px;
+  }
+  .eyebrow{
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+    margin: 0 0 20px 0;
+  }
+  .section-intro{
+    font-size: 16px;
+    color: var(--ink);
+    margin: 0 0 28px 0;
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  /* -------- Notes list -------- */
+  .notes{
+    list-style:none;
+    margin: 0;
+    padding: 0;
+    display:flex;
+    flex-direction: column;
+  }
+  .notes li{
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .notes li:last-child{
+    border-bottom: 1px solid var(--rule);
+  }
+  .note-link{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 24px;
+    align-items: baseline;
+    color: var(--ink);
+  }
+  .note-link:hover{
+    text-decoration:none;
+  }
+  .note-title{
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+    transition: color .15s ease;
+  }
+  .note-link:hover .note-title{
+    color: var(--accent);
+  }
+  .note-date{
+    font-size: 12px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .note-summary{
+    grid-column: 1 / -1;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .more{
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .more a{
+    color: var(--accent);
+  }
+
+  /* -------- Skills grid -------- */
+  .skills{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .skill{
+    padding: 18px 20px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: transparent;
+  }
+  .skill-name{
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 4px 0;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    letter-spacing: -0.01em;
+  }
+  .skill-desc{
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* -------- Now -------- */
+  .now-text{
+    font-size: 17px;
+    line-height: 1.75;
+    margin: 0;
+    max-width: 640px;
+  }
+  .now-updated{
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* -------- Newsletter -------- */
+  .newsletter-desc{
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.75;
+    margin: 0 0 20px 0;
+    max-width: 560px;
+  }
+  .newsletter-form{
+    display:flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 480px;
+  }
+  .newsletter-form input[type="email"]{
+    flex: 1 1 220px;
+    min-width: 0;
+    font: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    background: #fff;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color .15s ease;
+  }
+  .newsletter-form input[type="email"]:focus{
+    border-color: var(--accent);
+  }
+  .newsletter-form button{
+    font: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  .newsletter-form button:hover{
+    background: #185f9c;
+    border-color: #185f9c;
+  }
+  .newsletter-note{
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+
+  /* -------- Footer -------- */
+  .site-footer{
+    margin-top: 96px;
+    padding: 28px 0 48px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .site-footer .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .site-footer .links{
+    display:flex;
+    gap: 18px;
+  }
+  .site-footer .links a{
+    color: var(--ink-2);
+  }
+  .site-footer .links a:hover{
+    color: var(--accent);
+    text-decoration:none;
+  }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 640px){
+    .site-header{ padding: 20px 0; }
+    .site-header .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .nav{
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero{ padding: 32px 0 8px; }
+    .hero-grid{
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .mascot{
+      width: 120px;
+      height: 120px;
+      order: -1;
+    }
+    .hero-text{
+      font-size: 21px;
+      line-height: 1.7;
+    }
+
+    section.block{ padding-top: 72px; }
+
+    .skills{
+      grid-template-columns: 1fr;
+    }
+
+    .note-link{
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .note-date{
+      order: -1;
+    }
+
+    .site-footer{ margin-top: 72px; padding: 24px 0 36px; }
+    .site-footer .wrap{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo">yk_memo</a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      <a href="#notes">Notes</a>
+      <a href="#skills">Skills</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#salon">Salon</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" aria-label="はじめに">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p>シニアとAIの間に立っています。片倉台で月に一度のスマホサロンを開き、ボランティア教育プログラムを運営しています。</p>
+          <p>生成AIやAIエージェントの動向を追い、自分で手を動かして講座を作り、Claude Skills を公開しています。</p>
+          <p class="emph">AIと競争せず、自分のベストで使う。</p>
+          <p>そんな付き合い方を、地域で実践しています。</p>
+        </div>
+        <div class="mascot" role="img" aria-label="マスコットイラスト（後で差し替え）">
+          mascot<br/>240×240
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="notes" aria-labelledby="notes-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="notes-title">Recent notes</h2>
+      <ul class="notes">
+        <li>
+          <a class="note-link" href="#">
+            <span class="note-title">スマホサロンで「AIに聞いてみる」を覚えた日</span>
+            <span class="note-date">2026.04.18</span>
+            <p class="note-summary">70代の参加者が初めて生成AIに質問を投げた朝の記録。うまくいった会話と、すれ違った会話の両方について。</p>
+          </a>
+        </li>
+        <li>
+          <a class="note-link" href="#">
+            <span class="note-title">Claude Skills を教材づくりに使う</span>
+            <span class="note-date">2026.04.02</span>
+            <p class="note-summary">毎月の講座資料を Skill として切り出し、更新コストを半分以下に。ワークフローの現状メモ。</p>
+          </a>
+        </li>
+        <li>
+          <a class="note-link" href="#">
+            <span class="note-title">notebooklm-mcp-cli を導入してみた</span>
+            <span class="note-date">2026.03.21</span>
+            <p class="note-summary">NotebookLM を MCP 経由で呼び出す構成。自分のノートと講座資料をつなぐ実験。</p>
+          </a>
+        </li>
+      </ul>
+      <p class="more"><a href="#">Notes を全部見る →</a></p>
+    </div>
+  </section>
+
+  <section class="block" id="skills" aria-labelledby="skills-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="skills-title">Claude Skills</h2>
+      <p class="section-intro">個人や教育の現場で使える Claude Skills を作っています。GitHub で公開中。</p>
+      <div class="skills">
+        <div class="skill">
+          <h3 class="skill-name">lesson-plan</h3>
+          <p class="skill-desc">90 分のシニア向け講座の構成案を、目的と参加者像から生成する。</p>
+        </div>
+        <div class="skill">
+          <h3 class="skill-name">handout-jp</h3>
+          <p class="skill-desc">講座配布用プリントを A4 1〜2 枚で整える。大きめの本文と余白を優先。</p>
+        </div>
+        <div class="skill">
+          <h3 class="skill-name">salon-notes</h3>
+          <p class="skill-desc">スマホサロン当日の記録からふりかえりと次回の課題メモを書き出す。</p>
+        </div>
+        <div class="skill">
+          <h3 class="skill-name">prompt-rephraser</h3>
+          <p class="skill-desc">参加者の「聞きたいこと」をそのまま AI に渡せるプロンプトに置き換える。</p>
+        </div>
+        <div class="skill">
+          <h3 class="skill-name">faq-curator</h3>
+          <p class="skill-desc">よくある質問を分類し、回答の重複と抜けを整理する。地域コミュニティ運営向け。</p>
+        </div>
+        <div class="skill">
+          <h3 class="skill-name">obsidian-digest</h3>
+          <p class="skill-desc">Obsidian vault の今週分のノートから、公開用の短いメモを抽出する。</p>
+        </div>
+      </div>
+      <p class="more"><a href="#">全スキルを見る →</a></p>
+    </div>
+  </section>
+
+  <section class="block" id="now" aria-labelledby="now-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="now-title">いま</h2>
+      <p class="now-text">最近は Claude Code Skills を使った教材作成と、notebooklm-mcp-cli の導入に時間を使っています。来月の市民講座では Antigravity を取り上げる予定です。空き時間はだいたい、サロンの次回の資料を書き直しています。</p>
+      <p class="now-updated">最終更新：2026 年 4 月</p>
+    </div>
+  </section>
+
+  <section class="block" id="newsletter" aria-labelledby="newsletter-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="newsletter-title">Newsletter</h2>
+      <p class="newsletter-desc">月に一度、講座づくりで学んだことと、シニアの現場で見えた AI の話を短くまとめて送っています。</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='ありがとうございます';">
+        <label for="nl-email" class="visually-hidden" style="position:absolute;left:-9999px;">メールアドレス</label>
+        <input id="nl-email" type="email" required placeholder="you@example.com" autocomplete="email" />
+        <button type="submit">購読する</button>
+      </form>
+      <p class="newsletter-note">いつでも解除できます。スパムは送りません。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>© 2026 yk_memo</div>
+    <nav class="links" aria-label="外部リンク">
+      <a href="#">X</a>
+      <a href="#">GitHub</a>
+      <a href="#">Obsidian Publish</a>
+      <a href="#">RSS</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
