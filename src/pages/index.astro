@@ -1,5 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const recentNotes = (await getCollection('notes'))
+  .filter((e) => e.data.status === 'published')
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -29,27 +35,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="wrap">
       <h2 class="eyebrow" id="notes-title">Recent notes</h2>
       <ul class="notes">
-        <li>
-          <a class="note-link" href="/notes/claude-design-1day-build/">
-            <span class="note-title">シニア教育者がClaude Designで個人HPを1日で作った話｜つまずいた7箇所と解決策</span>
-            <span class="note-date">2026.04.26</span>
-            <p class="note-summary">Claude Design・Claude Code・Vercelで、シニア教育者が個人サイトを1日で公開した記録。7箇所のつまずきと解決策つき。</p>
-          </a>
-        </li>
-        <li>
-          <a class="note-link" href="/notes/salon-ai-hajimete/">
-            <span class="note-title">スマホサロンで「AIに聞いてみる」を覚えた日</span>
-            <span class="note-date">2026.04.18</span>
-            <p class="note-summary">70代の参加者が初めて生成AIに質問を投げた朝の記録。うまくいった会話と、すれ違った会話の両方について。</p>
-          </a>
-        </li>
-        <li>
-          <a class="note-link" href="/notes/claude-skills-kyozai/">
-            <span class="note-title">Claude Skills を教材づくりに使う</span>
-            <span class="note-date">2026.04.02</span>
-            <p class="note-summary">毎月の講座資料を Skill として切り出し、更新コストを半分以下に。ワークフローの現状メモ。</p>
-          </a>
-        </li>
+        {recentNotes.map((note) => (
+          <li>
+            <a class="note-link" href={`/notes/${note.id}/`}>
+              <span class="note-title">{note.data.title}</span>
+              <span class="note-date">{note.data.dateDisplay}</span>
+              <p class="note-summary">{note.data.description}</p>
+            </a>
+          </li>
+        ))}
       </ul>
       <p class="more"><a href="/notes/">Notes を全部見る →</a></p>
     </div>
