@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const salonOfficialUrl = 'https://sites.google.com/view/katakuradai/%E3%81%A4%E3%81%A9%E3%81%84%E3%81%AE%E5%A0%B4/%E3%82%B9%E3%83%9E%E3%83%9B%E3%82%8F%E3%81%84%E3%82%8F%E3%81%84%E3%82%B5%E3%83%AD%E3%83%B3%E6%B4%BB%E5%8B%95%E7%B4%B9%E4%BB%8B';
+
+const salonNotes = (await getCollection('notes', ({ data }) =>
+  data.tags.includes('salon') && data.status !== 'draft'
+)).sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<BaseLayout
+  title="スマホ・わいわいサロン — yk_memo"
+  description="片倉台で月1回開催している、シニア向けスマホ相談会の紹介ページ。"
+>
+
+<main>
+
+  <section class="hero" aria-label="サロン紹介">
+    <div class="wrap">
+      <h1 class="hero-title">
+        <span class="hero-line">質問、大歓迎。</span>
+        <span class="hero-line">みんなで学ぶ、スマホの「？」解決の場。</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="block" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="about-title">サロンとは</h2>
+      <div class="prose">
+        <p>「スマホ・わいわいサロン」は、片倉台に住む方々が気軽に集まり、スマホに関するあらゆる疑問を持ち寄る月例の集まりです。</p>
+        <p>講師から一方的に教える講座ではありません。参加者同士で教え合い、和気あいあいとした雰囲気の中で学ぶことを大切にしています。</p>
+        <p>2024年4月の開始以来、毎月続けてきました。最近では1回あたり20名以上の方が参加されることもあり、地域の学びの輪として少しずつ広がっています。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="themes" aria-labelledby="themes-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="themes-title">学びの6つのテーマ</h2>
+      <p class="section-intro">サロンでは、毎日の暮らしから少し先の技術まで、幅広く扱っています。</p>
+      <div class="theme-grid">
+        <div class="theme-card">
+          <p class="theme-num">①</p>
+          <h3 class="theme-title">毎日の基本操作</h3>
+          <p class="theme-body">スマホ操作の「できない」を「できる」に。文字の拡大、スクリーンショット、ショートカット作成、着信音の停止など、知っていると毎日が楽になる基本技を一つずつ。</p>
+        </div>
+        <div class="theme-card">
+          <p class="theme-num">②</p>
+          <h3 class="theme-title">LINEを徹底活用</h3>
+          <p class="theme-body">セキュリティ設定、トークのフォルダ分け、通知なしメッセージ、友だちリストの管理術。安全に、そして快適に使うための工夫を共有しています。</p>
+        </div>
+        <div class="theme-card">
+          <p class="theme-num">③</p>
+          <h3 class="theme-title">暮らしと地域を便利に</h3>
+          <p class="theme-body">東京ガスのWeb化対応、東京都の公式アプリ、PayPayのお得なキャンペーン情報など、行政サービスや生活情報をスマホ一つで活用する方法を扱っています。</p>
+        </div>
+        <div class="theme-card">
+          <p class="theme-num">④</p>
+          <h3 class="theme-title">安全・安心の備え</h3>
+          <p class="theme-body">緊急通報機能、ロック画面に医療情報を登録する方法、緊急連絡先の設定。もしものときに、自分と家族を守るための「守りの機能」を実践しています。</p>
+        </div>
+        <div class="theme-card">
+          <p class="theme-num">⑤</p>
+          <h3 class="theme-title">趣味と楽しみを広げる</h3>
+          <p class="theme-body">YouTubeでの動画検索や再生リストの活用、広告の仕組み。新しい趣味の世界をスマホ一つで広げる方法を共有しています。</p>
+        </div>
+        <div class="theme-card">
+          <p class="theme-num">⑥</p>
+          <h3 class="theme-title">未来の技術に触れる</h3>
+          <p class="theme-body">話題の「生成AI」も、サロンで実際に体験しています。Microsoft Copilotで「片倉台の魅力を伝える文章」を書いてみるなど、新しい技術を恐れずに触れることを大切にしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="philosophy" aria-labelledby="philosophy-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="philosophy-title">サロンの哲学</h2>
+      <blockquote class="salon-quote">
+        <p>主役は「懇談タイム」。<br/>学び合い、教え合う、私たちの時間。</p>
+      </blockquote>
+      <div class="prose">
+        <p>「今月のワンポイント」の解説のあとは、テーブルごとに分かれての懇談タイム。みなさんの疑問を共有し、お互いの画面を見ながら、和気あいあいと解決策を探します。どんな小さな質問も大歓迎。誰もが、生徒であり先生です。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="notes" aria-labelledby="notes-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="notes-title">関連する記事</h2>
+      <p class="section-intro">サロンの運営や教材づくりに関する記事を、yk_memoのNotesから自動で表示します。</p>
+      {salonNotes.length > 0 ? (
+        <ul class="articles">
+          {salonNotes.map((note) => (
+            <li>
+              <a class="article-link" href={`/notes/${note.id}/`}>
+                <h3 class="article-title">{note.data.title}</h3>
+                <p class="article-summary">{note.data.description}</p>
+                <div class="article-meta">
+                  <span class="article-date">{note.data.dateDisplay}</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty-note">準備中です。</p>
+      )}
+    </div>
+  </section>
+
+  <section class="block" id="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-block">
+        <h2 class="cta-title" id="cta-title">最新は公式ページへ</h2>
+        <p class="cta-body">初めての方も大歓迎。お使いのスマートフォンと、「知りたい」「聞きたい」という気持ちがあれば十分です。</p>
+        <a
+          class="cta-btn"
+          href={salonOfficialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >スマホ・わいわいサロン 公式ページ<span class="ext-icon" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block salon-footer-info" aria-label="主催・運営情報">
+    <div class="wrap">
+      <p class="organizer-info">
+        主催：片倉台自治会・福祉委員会・福祉ネットワーク<br/>
+        運営・講師：yk_memo（協力メンバー数名）
+      </p>
+    </div>
+  </section>
+
+</main>
+
+</BaseLayout>
+
+<style>
+  /* ---- Hero ---- */
+  .hero { padding: 56px 0 0; }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .hero-line { display: block; }
+
+  /* ---- Sections ---- */
+  .block { padding-top: 80px; }
+
+  .eyebrow {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+    margin: 0 0 20px 0;
+  }
+
+  .section-intro {
+    font-size: 16px;
+    color: var(--color-text);
+    margin: 0 0 28px 0;
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  /* ---- Prose paragraphs ---- */
+  .prose {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--color-text);
+    max-width: 640px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .prose p { margin: 0 0 1.2em 0; }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* ---- Theme grid ---- */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .theme-card {
+    padding: 20px 20px 24px;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: transparent;
+  }
+
+  .theme-num {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin: 0 0 6px 0;
+    line-height: 1;
+  }
+
+  .theme-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0 0 8px 0;
+    line-height: 1.45;
+  }
+
+  .theme-body {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ---- Blockquote ---- */
+  .salon-quote {
+    margin: 0 0 24px 0;
+    padding: 4px 0 4px 20px;
+    border-left: 3px solid var(--color-accent);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.75;
+    color: var(--color-text);
+  }
+  .salon-quote p { margin: 0; }
+
+  /* ---- Related articles ---- */
+  .articles { list-style: none; margin: 0; padding: 0; }
+  .articles li { padding: 16px 0; border-top: 1px solid var(--color-border); }
+  .articles li:last-child { border-bottom: 1px solid var(--color-border); }
+
+  .article-link { display: block; color: var(--color-text); }
+  .article-link:hover { text-decoration: none; }
+
+  .article-title {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin: 0 0 6px 0;
+    transition: color .15s ease;
+  }
+  .article-link:hover .article-title { color: var(--color-accent); }
+
+  .article-summary {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin: 0 0 8px 0;
+    max-width: 620px;
+  }
+
+  .article-meta {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .empty-note {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* ---- CTA block ---- */
+  .cta-block {
+    padding: 32px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-soft);
+    max-width: 640px;
+  }
+
+  .cta-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 12px 0;
+    color: var(--color-text);
+  }
+
+  .cta-body {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin: 0 0 20px 0;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 18px;
+    background: var(--color-accent);
+    color: #fff;
+    border: 1px solid var(--color-accent);
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  .cta-btn:hover {
+    background: #185f9c;
+    border-color: #185f9c;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .ext-icon {
+    font-size: 13px;
+    line-height: 1;
+    vertical-align: super;
+    margin-left: 2px;
+  }
+
+  /* ---- Organizer footer info ---- */
+  .salon-footer-info { padding-bottom: 16px; }
+
+  .organizer-info {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 900px) {
+    .theme-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 32px 0 0; }
+    .hero-title { font-size: 22px; }
+
+    .block { padding-top: 56px; }
+
+    .theme-grid { grid-template-columns: 1fr; }
+
+    .cta-block { padding: 24px; }
+  }
+</style>
