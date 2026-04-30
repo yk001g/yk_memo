@@ -11,6 +11,7 @@ const recentNotes = (await getCollection('notes'))
 <BaseLayout
   title="yk_memo — シニアとAIの間に立つ"
   description="日本のAIリテラシー教育者 yk_memo の個人サイト。シニア向けスマートフォン教室、Claude Skills 開発、地域コミュニティ運営。"
+  image="images/hero/ogp.jpg"
 >
 
 <main>
@@ -24,9 +25,17 @@ const recentNotes = (await getCollection('notes'))
           <p class="emph">AIと競争せず、自分のベストで使う。</p>
           <p>そんな付き合い方を、地域で実践しています。</p>
         </div>
-        <div class="mascot" role="img" aria-label="マスコットイラスト（後で差し替え）">
-          mascot<br/>240×240
-        </div>
+        <picture class="hero-photo">
+          <source srcset={`${import.meta.env.BASE_URL}images/hero/hero.webp`} type="image/webp" />
+          <img
+            src={`${import.meta.env.BASE_URL}images/hero/hero.jpg`}
+            alt="yk_memo"
+            width="240"
+            height="240"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
       </div>
     </div>
   </section>
@@ -121,7 +130,7 @@ const recentNotes = (await getCollection('notes'))
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1fr 160px;
+    grid-template-columns: 1fr 240px;
     gap: 40px;
     align-items: start;
   }
@@ -142,24 +151,19 @@ const recentNotes = (await getCollection('notes'))
     margin-top: 1.2em;
   }
 
-  .mascot {
-    width: 160px;
-    height: 160px;
-    border: 1px solid var(--color-border);
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text-secondary);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    line-height: 1.5;
-    text-align: center;
-    background: repeating-linear-gradient(
-      135deg,
-      transparent 0 8px,
-      rgba(44,44,42,0.035) 8px 9px
-    );
+  .hero-photo {
+    display: block;
+    width: 240px;
+    height: 240px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   /* ---- Section ---- */
@@ -326,7 +330,7 @@ const recentNotes = (await getCollection('notes'))
   @media (max-width: 640px) {
     .hero { padding: 32px 0 8px; }
     .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-    .mascot { width: 120px; height: 120px; order: -1; }
+    .hero-photo { width: 120px; height: 120px; order: -1; }
     .hero-text { font-size: 21px; line-height: 1.7; }
 
     section.block { padding-top: 72px; }
