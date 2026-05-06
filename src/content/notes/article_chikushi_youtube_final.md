@@ -1,10 +1,11 @@
 ---
 title: "竹紙研究会の紹介動画を、YouTubeで公開しました"
-subtitle: "AIで作った90秒の映像を、ようやく『観ていただける場所』に置きました"
-date: 2026-05-06
-author: yk_memo
-tags: [video, claude-code, hyperframes, 竹紙研究会, 里山, AIリテラシー]
 description: "Claude Code × Hyperframesで制作した、八王子・竹紙研究会の活動紹介動画（90秒）をYouTubeで公開しました。里山と竹林を未来につなぐ会の取り組みを、AIで作った映像で。"
+date: "2026-05-06"
+dateDisplay: "2026.05.06"
+tags: ["video", "claude-code", "hyperframes", "竹紙研究会", "里山", "AIリテラシー"]
+lede: "Claude Code × Hyperframes で制作した竹紙研究会の活動紹介動画（90秒）を、YouTubeで公開しました。里山と竹林を未来につなぐ取り組みを、AIで作った映像でお届けします。"
+status: "published"
 ---
 
 # 竹紙研究会の紹介動画を、YouTubeで公開しました
