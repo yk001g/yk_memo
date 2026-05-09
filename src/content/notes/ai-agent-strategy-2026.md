@@ -685,7 +685,7 @@ Style: ブランド準拠（カラー、フォント、レイアウト）</code>
   color: var(--r-paper);
   padding: 2rem 1.5rem;
   border-right: 4px solid var(--r-accent);
-  position: sticky;
+  position: relative; /* sticky was removed due to Astro rendering issue (2026-05-10) */
   top: 1rem;
   align-self: start;
   max-height: calc(100vh - 2rem);
