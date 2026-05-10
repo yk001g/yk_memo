@@ -5,7 +5,7 @@ date: "2026-05-09"
 dateDisplay: "2026.05.09"
 tags: ["AI", "道具", "Claude", "Gemini", "ChatGPT"]
 lede: "Claude Pro と Google AI Pro の組み合わせで、ChatGPT 5.5 と Workspace Agents に対抗できるのか。4本のレポートにまとめた調査記録です。"
-status: "draft"
+status: "published"
 wide: true
 ---
 
