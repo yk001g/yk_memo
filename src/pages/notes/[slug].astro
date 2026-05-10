@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, description, date, dateDisplay, updated, tags, lede, status } = entry.data;
+const { title, description, date, dateDisplay, updated, tags, lede, status, wide } = entry.data;
 ---
 
 <BaseLayout title={`${title} — yk_memo`} description={description}>
@@ -32,8 +32,8 @@ const { title, description, date, dateDisplay, updated, tags, lede, status } = e
       </div>
     </header>
 
-    <div class="wrap">
-      <div class="article-body">
+    <div class:list={["wrap", { "wrap-wide": wide }]}>
+      <div class:list={["article-body", { "article-body-wide": wide }]}>
 
         {status === 'draft' ? (
           <p>(この記事はまだ準備中です。)</p>

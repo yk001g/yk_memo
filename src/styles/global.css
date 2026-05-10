@@ -16,6 +16,7 @@
   --max-width: 720px;
   --max-width-article: 680px;
   --max-width-article-wide: 840px;
+  --max-width-article-report: 1100px;
 
   /* Typography */
   --font-base: 17px;
@@ -70,6 +71,14 @@ a:hover { text-decoration: underline; }
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.wrap-wide {
+  max-width: var(--max-width-article-report);
+}
+
+.article-body-wide > * {
+  max-width: var(--max-width-article-report) !important;
 }
 
 .measure {

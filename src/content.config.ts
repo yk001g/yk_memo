@@ -12,6 +12,7 @@ const notes = defineCollection({
     tags:        z.array(z.string()),
     lede:        z.string(),
     status:      z.enum(['published', 'draft']).default('published'),
+    wide:        z.boolean().default(false),
   }),
 });
 

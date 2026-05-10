@@ -6,6 +6,7 @@ dateDisplay: "2026.05.09"
 tags: ["AI", "道具", "Claude", "Gemini", "ChatGPT"]
 lede: "Claude Pro と Google AI Pro の組み合わせで、ChatGPT 5.5 と Workspace Agents に対抗できるのか。4本のレポートにまとめた調査記録です。"
 status: "draft"
+wide: true
 ---
 
 ChatGPTの新機能が話題になるたびに、「自分の契約だけで足りているのか」と気になることはありませんか。私の現在の契約は **Claude Pro + Google AI Pro** の組み合わせです。ChatGPT Plus は契約していません。この状態で、2026年4月にリリースされた ChatGPT 5.5 と Workspace Agents に対抗できるのか——気になって調査を始めたら、想像以上に深い話になりました。
