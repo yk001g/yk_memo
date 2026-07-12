@@ -1,7 +1,11 @@
 ---
-title: "Apple Notes → Obsidian ワンクリック取込アプリを作った話（開発記・ブログ元ネタ）"
-status: draft / 元ネタ
-created: 2026-07-13
+title: "Appleのメモを1クリックでObsidianへ｜自作アプリでハマったflat-rtfdの罠"
+description: "Apple「メモ」で開いたノートをDockアイコン1クリックでObsidianのInboxに取り込むmacアプリを自作した開発記。AppleScript＋JXA＋pandocの4層構成と、mac権限（TCC）・Apple独自クリップボード形式にハマった実測ベースの記録です。"
+date: "2026-07-13"
+dateDisplay: "2026.07.13"
+tags: ["Obsidian", "Apple", "アプリ開発", "AppleScript", "道具"]
+lede: "Apple「メモ」を1クリックでObsidianに取り込む自作macアプリの開発記。mac権限とAppleの独自クリップボード形式に殴られた実測の記録です。"
+status: "published"
 ---
 
 # Apple のメモを Obsidian に1クリックで放り込むアプリを作った
