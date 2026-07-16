@@ -1,6 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeLayout from '../layouts/HomeLayout.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import portraitPlaceholder from '../assets/home/portrait-placeholder.jpg';
+import schedule from '../data/schedule.json';
 
 const recentNotes = (await getCollection('notes'))
   .filter((e) => e.data.status === 'published')
@@ -8,345 +11,528 @@ const recentNotes = (await getCollection('notes'))
   .slice(0, 3);
 ---
 
-<BaseLayout
-  title="yk_memo — シニアとAIの間に立つ"
-  description="日本のAIリテラシー教育者 yk_memo の個人サイト。シニア向けスマートフォン教室、Claude Skills 開発、地域コミュニティ運営。"
-  image="images/hero/ogp.jpg"
+<HomeLayout
+  title="yk_memo — 自分で考える楽しさを、AI時代にも。"
+  description="AIに考えさせず、あなたの思考を広げる——八王子発、シニアと地域のAIリテラシー教室。片倉台のスマホ・わいわいサロン、市民講座、ICT利活用研究会を一人の実践者が続けています。"
 >
 
 <main>
-
-  <section class="hero" aria-label="はじめに">
+  <div class="hero">
     <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <p>シニアとAIの間に立っています。片倉台で月に一度のスマホサロンを開き、ボランティア教育プログラムを運営しています。</p>
-          <p>生成AIやAIエージェントの動向を追い、自分で手を動かして講座を作り、Claude Skills を公開しています。</p>
-          <p class="emph">AIと競争せず、自分のベストで使う。</p>
-          <p>そんな付き合い方を、地域で実践しています。</p>
-        </div>
-        <picture class="hero-photo">
-          <source srcset={`${import.meta.env.BASE_URL}images/hero/hero.webp`} type="image/webp" />
-          <img
-            src={`${import.meta.env.BASE_URL}images/hero/hero.jpg`}
-            alt="yk_memo"
-            width="240"
-            height="240"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+      <h1>自分で考える楽しさを、<br>AI時代にも。</h1>
+      <p class="sub">AIに考えさせず、あなたの思考を広げる<br>八王子発、シニアと地域のAIリテラシー教室</p>
+      <a class="cta" href="#doors">活動を見てみる</a>
+      <a class="quiet-link" href="#contact">講座のご依頼はこちら ›</a>
+    </div>
+  </div>
+
+  <section class="doors" id="doors">
+    <div class="wrap">
+      <div class="door-grid">
+        <a class="door" href="#activities">
+          <h2>参加してみたい方へ</h2>
+          <p>毎月のスマホ・わいわいサロン、市民講座のご案内。初めてでも、途中からでも。</p>
+          <span class="more">さらに詳しく ›</span>
+        </a>
+        <a class="door" href="#blog">
+          <h2>読んでみたい方へ</h2>
+          <p>yk_memoブログとXで、自分で試したことだけを発信しています。</p>
+          <span class="more">さらに詳しく ›</span>
+        </a>
+        <a class="door" href="#contact">
+          <h2>講座のご依頼</h2>
+          <p>自治会・社会福祉協議会・生涯学習の場への出張講座を承ります。</p>
+          <span class="more">さらに詳しく ›</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="block" id="notes" aria-labelledby="notes-title">
+  <section class="about" id="about">
     <div class="wrap">
-      <h2 class="eyebrow" id="notes-title">Recent notes</h2>
-      <ul class="notes">
-        {recentNotes.map((note) => (
-          <li>
-            <a class="note-link" href={`/notes/${note.id}/`}>
-              <span class="note-title">{note.data.title}</span>
-              <span class="note-date">{note.data.dateDisplay}</span>
-              <p class="note-summary">{note.data.description}</p>
-            </a>
-          </li>
+      <p class="eyebrow">想い</p>
+      <h2 class="section-title">なぜ、この活動を続けているのか。</h2>
+      <div class="reading">
+        <Image
+          class="portrait-img"
+          src={portraitPlaceholder}
+          alt="yk_memo（YK）の写真"
+          width={128}
+          height={128}
+        />
+        <p class="who">yk_memo（YK）<br>八王子・片倉台でAIリテラシー教育を続けています</p>
+
+        <p class="lead-quote">AIに考えさせない。<br>自分の思考を、拡張する。</p>
+
+        <h3>私が毎回、現場に立ちます</h3>
+        <p class="body">yk_memoは組織ではなく、一人の実践者の活動です。5年前から片倉台自治会で福祉の活動に携わり、2年前からは「スマホ・わいわいサロン」を毎月開いています。ICT利活用研究会の一員として、八王子市の講座も担当しています。毎月のサロンも、市民講座も、私自身が準備し、私自身がお話しします。</p>
+
+        <h3>なぜ、シニアとAIなのか</h3>
+        <p class="body">AIの発展は、これからますます速くなっていきます。そしてその流れは、若い人だけのものではありません。スマホがそうだったように、シニアの皆さんにとっても「スマホの次はAI」が暮らしの当たり前になっていきます。だからこそ、身近な場所で、楽しみながら触れられる機会が必要だと考えています。スマホもAIも、道具です。道具は、使う人が主役になったときにはじめて役に立ちます。</p>
+
+        <h3>AIとの向き合い方</h3>
+        <p class="body">AIは、答えを出してくれる機械ではありません。あなたの考えを広げてくれる道具です。私は5つのAIサービスを仲間と手分けして毎日使い比べていますが、どのサービスでも大事なことは同じでした——考えることをやめないこと。</p>
+        <p class="body">だからこの教室では、「AIの答えをそのまま使う方法」は教えません。「AIと話しながら、自分の考えをたしかめる方法」をお伝えしています。</p>
+
+        <div class="positioning">yk_memoは、東京・八王子で「AIに考えさせず、自分の思考を拡張する」使い方を伝え続ける、個人のAIリテラシー教育活動です。毎月のスマホ・わいわいサロン、市民講座、5つのAIサービスを比較実践するICT研究会——組織ではなく一人の実践者が、自分で試したことだけを、地域とオンラインの両方に発信しています。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="activities" id="activities">
+    <div class="wrap">
+      <p class="eyebrow">活動</p>
+      <h2 class="section-title">3つの学びの場を開いています。</h2>
+      <div class="act-grid">
+
+        <div class="act-card">
+          <div class="act-photo"><span>サロンの現場写真</span></div>
+          <div class="act-body">
+            <h3>スマホ・わいわいサロン</h3>
+            <p class="act-meta">
+              <strong>いつ：</strong>毎月 第1火曜日 13:30〜<br>
+              <strong>どこで：</strong>片倉台自治会<br>
+              <strong>どなたでも：</strong>スマホの「困った」を持ち寄る会
+            </p>
+            <p class="act-ease">初めてでも、途中からでも。予約は不要です。</p>
+            <div class="act-voice">
+              <span class="v-label">参加者の声</span>
+              「参加して良かった。皆さんとワイワイガヤガヤ話していて、とても楽しかった」
+            </div>
+          </div>
+        </div>
+
+        <div class="act-card">
+          <div class="act-photo"><span>講座の現場写真</span></div>
+          <div class="act-body">
+            <h3>市民講座</h3>
+            <p class="act-meta">
+              <strong>いつ：</strong>年3回程度（不定期開催）<br>
+              <strong>どこで：</strong>八王子市生涯学習センターほか<br>
+              <strong>テーマ：</strong>AIをはじめて触る方向けの体験講座
+            </p>
+            <p class="act-ease">パソコンが苦手でも大丈夫。ゆっくり進めます。</p>
+            <div class="act-voice">
+              <span class="v-label">参加者の声</span>
+              「AIはまったくの初心者ですが、楽しい使い方におどろきました。注意点も教わったので、これから生活の中で上手に使っていきたいです」
+            </div>
+          </div>
+        </div>
+
+        <div class="act-card">
+          <div class="act-photo"><span>研究会の様子</span></div>
+          <div class="act-body">
+            <h3>ICT利活用研究会</h3>
+            <p class="act-meta">
+              <strong>いつ：</strong>隔週<br>
+              <strong>メンバー：</strong>5名（各自が別のAIサービスを担当）<br>
+              <strong>やり方：</strong>持ち回りで発表・比較検討
+            </p>
+            <p class="act-ease">5つのAIを使い比べる、この教室の「台所」です。</p>
+            <div class="act-voice">
+              <span class="v-label">この場から生まれるもの</span>
+              サロンや講座でお伝えする内容は、すべてここでの比較実践が土台になっています。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="reason" id="reason">
+    <div class="wrap">
+      <p class="eyebrow">選ばれる理由</p>
+      <h2 class="section-title">続けているから、伝えられる。</h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">毎月<small>開催</small></div>
+          <div class="label">スマホ・わいわいサロン</div>
+        </div>
+        <div class="stat">
+          <div class="num">2年<small>継続</small></div>
+          <div class="label">やめずに続けています</div>
+        </div>
+        <div class="stat">
+          <div class="num">5<small>サービス比較</small></div>
+          <div class="label">ICT研究会の実践</div>
+        </div>
+      </div>
+      <p class="stats-note">特定のAIサービスの宣伝ではなく、5つのサービスを実際に比較しながら使い分ける現場を持っています。</p>
+    </div>
+  </section>
+
+  <section class="blog" id="blog">
+    <div class="wrap">
+      <p class="eyebrow">発信</p>
+      <h2 class="section-title">自分で試したことだけを、書いています。</h2>
+      <div class="article-card">
+        <p class="kicker">代表記事</p>
+        <h3>AIに考えさせるな</h3>
+        <p>AIは答えを出す機械ではなく、考えを広げる道具——その使い方を、毎月の現場での実践から書いています。</p>
+        <a href="#">読んでみる ›</a>
+      </div>
+      {recentNotes.length > 0 && (
+        <ul class="recent-notes">
+          {recentNotes.map((note) => (
+            <li>
+              <a href={`/notes/${note.id}/`}>
+                <span class="rn-title">{note.data.title}</span>
+                <span class="rn-date">{note.data.dateDisplay}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="wrap">
+      <p class="eyebrow">お知らせ・予定</p>
+      <h2 class="section-title">次の予定です。</h2>
+      <div class="news-list">
+        {schedule.map((item) => (
+          <div class="news-item">
+            <span class="news-date">{item.date}</span>
+            <span class="news-title">
+              {item.title}
+              {item.badge && <span class="news-badge">{item.badge}</span>}
+            </span>
+          </div>
         ))}
-      </ul>
-      <p class="more"><a href="/notes/">Notes を全部見る →</a></p>
+      </div>
     </div>
   </section>
 
-  <section class="block" id="skills" aria-labelledby="skills-title">
+  <section class="contact" id="contact">
     <div class="wrap">
-      <h2 class="eyebrow" id="skills-title">Claude Skills</h2>
-      <p class="section-intro">個人や教育の現場で使える Claude Skills を作っています。GitHub で公開中。</p>
-      <div class="skills">
-        <div class="skill">
-          <h3 class="skill-name">lesson-plan</h3>
-          <p class="skill-desc">90 分のシニア向け講座の構成案を、目的と参加者像から生成する。</p>
+      <p class="eyebrow">参加・お問い合わせ</p>
+      <h2 class="section-title">お待ちしています。</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>参加してみたい方</h3>
+          <p>わいわいサロンは予約不要です。<br>毎月第1火曜 13:30、片倉台自治会へ<br>そのままお越しください。</p>
+          <a class="cta" href="#news">次回の予定を見る</a>
         </div>
-        <div class="skill">
-          <h3 class="skill-name">handout-jp</h3>
-          <p class="skill-desc">講座配布用プリントを A4 1〜2 枚で整える。大きめの本文と余白を優先。</p>
-        </div>
-        <div class="skill">
-          <h3 class="skill-name">salon-notes</h3>
-          <p class="skill-desc">スマホサロン当日の記録からふりかえりと次回の課題メモを書き出す。</p>
-        </div>
-        <div class="skill">
-          <h3 class="skill-name">prompt-rephraser</h3>
-          <p class="skill-desc">参加者の「聞きたいこと」をそのまま AI に渡せるプロンプトに置き換える。</p>
-        </div>
-        <div class="skill">
-          <h3 class="skill-name">faq-curator</h3>
-          <p class="skill-desc">よくある質問を分類し、回答の重複と抜けを整理する。地域コミュニティ運営向け。</p>
-        </div>
-        <div class="skill">
-          <h3 class="skill-name">obsidian-digest</h3>
-          <p class="skill-desc">Obsidian vault の今週分のノートから、公開用の短いメモを抽出する。</p>
+        <div class="contact-card">
+          <h3>講座・研修のご依頼</h3>
+          <p>自治会・社会福祉協議会・生涯学習の場への<br>出張講座を承ります。<br>まずはお気軽にご相談ください。</p>
+          <a class="quiet" href="#">【問い合わせ手段】 ›</a>
         </div>
       </div>
-      <p class="more"><a href="/skills/">全スキルを見る →</a></p>
     </div>
   </section>
-
-  <section class="block" id="lessons" aria-labelledby="lessons-title">
-    <div class="wrap">
-      <h2 class="eyebrow" id="lessons-title">Lessons</h2>
-      <p class="section-intro">八王子の生涯学習センターでのシニア向け市民講座。NotebookLM・Gemini・Antigravity などをテーマに。</p>
-    </div>
-  </section>
-
-  <section class="block" id="salon" aria-labelledby="salon-title">
-    <div class="wrap">
-      <h2 class="eyebrow" id="salon-title">いま</h2>
-      <p class="now-text">最近は Claude Code Skills を使った教材作成と、notebooklm-mcp-cli の導入に時間を使っています。来月の市民講座では Antigravity を取り上げる予定です。空き時間はだいたい、サロンの次回の資料を書き直しています。</p>
-      <p class="now-updated">最終更新：2026 年 4 月</p>
-    </div>
-  </section>
-
-  <section class="block" id="newsletter" aria-labelledby="newsletter-title">
-    <div class="wrap">
-      <h2 class="eyebrow" id="newsletter-title">Newsletter</h2>
-      <p class="newsletter-desc">月に一度、講座づくりで学んだことと、シニアの現場で見えた AI の話を短くまとめて送っています。</p>
-      <form class="newsletter-form">
-        <label for="nl-email" style="position:absolute;left:-9999px;">メールアドレス</label>
-        <input id="nl-email" type="email" required placeholder="you@example.com" autocomplete="email" />
-        <button type="submit">購読する</button>
-      </form>
-      <p class="newsletter-note">いつでも解除できます。スパムは送りません。</p>
-    </div>
-  </section>
-
 </main>
 
-</BaseLayout>
+</HomeLayout>
 
 <style>
   /* ---- Hero ---- */
-  .hero { padding: 56px 0 24px; }
+  .hero {
+    background: var(--home-navy);
+    text-align: center;
+    padding: 120px 24px 110px;
+  }
+  .hero h1 {
+    color: var(--home-cream-on-navy);
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -0.3px;
+    margin: 0 0 22px;
+  }
+  .hero .sub {
+    color: var(--home-mist-on-navy);
+    font-size: clamp(18px, 2.2vw, 19px);
+    line-height: 1.9;
+    margin: 0 0 42px;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--home-yellow);
+    color: var(--home-ink);
+    font-size: 17px;
+    font-weight: 600;
+    padding: 15px 44px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .cta:hover { filter: brightness(1.05); text-decoration: none; }
+  .hero .quiet-link {
+    display: block;
+    margin-top: 20px;
+    color: var(--home-mist-on-navy);
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .hero .quiet-link:hover,
+  .hero .quiet-link:focus-visible { color: var(--home-cream-on-navy); }
 
-  .hero-grid {
+  main :global(section) { padding: 96px 0; }
+
+  :global(.eyebrow) {
+    color: var(--home-blue-text);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 0 0 10px;
+  }
+  :global(.section-title) {
+    text-align: center;
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 600;
+    margin: 0 0 56px;
+    line-height: 1.6;
+  }
+
+  /* ---- Doors ---- */
+  .doors { background: var(--home-cream); }
+  .door-grid {
     display: grid;
-    grid-template-columns: 1fr 240px;
-    gap: 40px;
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
   }
-
-  .hero-text {
-    font-size: 23px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: var(--color-text);
-    letter-spacing: 0.005em;
-    text-wrap: pretty;
-  }
-  .hero-text p { margin: 0 0 1.1em 0; }
-  .hero-text p:last-child { margin-bottom: 0; }
-  .hero-text .emph {
-    font-weight: 500;
+  .door {
+    background: var(--home-white);
+    border-radius: 20px;
+    padding: 40px 28px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--home-ink);
     display: block;
-    margin-top: 1.2em;
   }
+  .door:hover { text-decoration: none; }
+  .door h2 { font-size: 19px; font-weight: 600; margin: 0 0 10px; }
+  .door p { font-size: 18px; line-height: 1.9; color: var(--home-ink-soft); margin: 0 0 16px; }
+  .door .more { color: var(--home-blue-text); font-size: 15px; }
 
-  .hero-photo {
-    display: block;
-    width: 240px;
-    height: 240px;
-    border-radius: 4px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .hero-photo img {
-    width: 100%;
-    height: 100%;
+  /* ---- About ---- */
+  .about { background: var(--home-white); }
+  .about .reading { max-width: 640px; margin: 0 auto; }
+  .about :global(.portrait-img) {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
     object-fit: cover;
     display: block;
+    margin: 0 auto 20px;
+  }
+  .about .who {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--home-ink-soft);
+    margin: 0 0 48px;
+  }
+  .about .lead-quote {
+    text-align: center;
+    font-size: clamp(22px, 3.2vw, 28px);
+    font-weight: 600;
+    color: var(--home-navy);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    padding: 40px 0 44px;
+  }
+  .about h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--home-ink);
+    margin: 48px 0 16px;
+    text-align: left;
+  }
+  .about p.body {
+    font-size: 18px;
+    color: var(--home-ink-soft);
+    line-height: 1.9;
+    margin: 0 0 18px;
+    text-align: left;
+  }
+  .about .positioning {
+    background: var(--home-cream);
+    border-radius: 20px;
+    padding: 32px 30px;
+    margin-top: 56px;
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--home-ink);
   }
 
-  /* ---- Section ---- */
-  section.block { padding-top: 96px; }
-
-  .eyebrow {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.02em;
-    margin: 0 0 20px 0;
+  /* ---- Activities ---- */
+  .activities { background: var(--home-cream); }
+  .act-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
   }
-
-  .section-intro {
-    font-size: 16px;
-    color: var(--color-text);
-    margin: 0 0 28px 0;
-    line-height: 1.75;
-    max-width: 640px;
-  }
-
-  /* ---- Notes list ---- */
-  .notes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .act-card {
+    background: var(--home-white);
+    border-radius: 20px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
-  .notes li { padding: 18px 0; border-top: 1px solid var(--color-border); }
-  .notes li:last-child { border-bottom: 1px solid var(--color-border); }
-
-  .note-link {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 6px 24px;
-    align-items: baseline;
-    color: var(--color-text);
-  }
-  .note-link:hover { text-decoration: none; }
-
-  .note-title {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--color-text);
-    transition: color .15s ease;
-  }
-  .note-link:hover .note-title { color: var(--color-accent); }
-
-  .note-date {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-
-  .note-summary {
-    grid-column: 1 / -1;
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .more { margin-top: 24px; font-size: 14px; }
-  .more a { color: var(--color-accent); }
-
-  /* ---- Skills grid (home version) ---- */
-  .skills {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
-  }
-  .skill {
-    padding: 18px 20px;
-    border-right: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    background: transparent;
-  }
-  .skill-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--color-text);
-    margin: 0 0 4px 0;
-    font-family: var(--font-mono);
-    letter-spacing: -0.01em;
-  }
-  .skill-desc {
-    font-size: 14px;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* ---- Now ---- */
-  .now-text {
-    font-size: 17px;
-    line-height: 1.75;
-    margin: 0;
-    max-width: 640px;
-  }
-  .now-updated {
-    margin-top: 20px;
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ---- Newsletter ---- */
-  .newsletter-desc {
-    font-size: 16px;
-    color: var(--color-text);
-    line-height: 1.75;
-    margin: 0 0 20px 0;
-    max-width: 560px;
-  }
-
-  .newsletter-form {
+  .act-photo {
+    height: 150px;
+    background: linear-gradient(135deg, rgba(22,50,79,0.14), rgba(29,115,190,0.14));
     display: flex;
-    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    color: var(--home-ink-soft);
+    font-size: 13px;
+  }
+  .act-body { padding: 26px 24px 28px; display: flex; flex-direction: column; flex: 1; }
+  .act-body h3 { font-size: 19px; font-weight: 600; margin: 0 0 12px; }
+  .act-meta {
+    font-size: 16px;
+    color: var(--home-ink-soft);
+    line-height: 1.9;
+    margin: 0 0 14px;
+  }
+  .act-meta strong { color: var(--home-ink); font-weight: 600; }
+  .act-ease {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--home-blue-text);
+    margin: 0 0 16px;
+  }
+  .act-voice {
+    background: var(--home-cream);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--home-ink-soft);
+    margin-top: auto;
+  }
+  .act-voice .v-label { font-size: 12px; color: var(--home-ink-soft); display: block; margin-bottom: 4px; }
+
+  /* ---- Reason ---- */
+  .reason { background: var(--home-white); }
+  .stats {
+    display: flex;
+    gap: 64px;
+    justify-content: center;
     flex-wrap: wrap;
-    max-width: 480px;
+    text-align: center;
   }
-  .newsletter-form input[type="email"] {
-    flex: 1 1 220px;
-    min-width: 0;
-    font: inherit;
-    font-size: 15px;
-    padding: 10px 12px;
-    border: 1px solid var(--color-border);
-    background: #fff;
-    color: var(--color-text);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color .15s ease;
+  .stat .num { font-size: 40px; font-weight: 600; color: var(--home-navy); line-height: 1.3; }
+  .stat .num small { font-size: 18px; font-weight: 600; }
+  .stat .label { font-size: 15px; color: var(--home-ink-soft); margin-top: 6px; }
+  .stats-note {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--home-ink-soft);
+    margin-top: 44px;
   }
-  .newsletter-form input[type="email"]:focus { border-color: var(--color-accent); }
-  .newsletter-form button {
-    font: inherit;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 10px 18px;
-    background: var(--color-accent);
-    color: #fff;
-    border: 1px solid var(--color-accent);
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background-color .15s ease, border-color .15s ease;
+
+  /* ---- Blog ---- */
+  .blog { background: var(--home-cream); }
+  .article-card {
+    background: var(--home-white);
+    border-radius: 20px;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 40px 36px;
   }
-  .newsletter-form button:hover {
-    background: #185f9c;
-    border-color: #185f9c;
+  .article-card .kicker { font-size: 13px; color: var(--home-ink-soft); margin: 0 0 8px; }
+  .article-card h3 { font-size: 24px; font-weight: 600; margin: 0 0 12px; }
+  .article-card p { font-size: 18px; line-height: 1.9; color: var(--home-ink-soft); margin: 0 0 18px; }
+  .article-card a { color: var(--home-blue-text); font-size: 18px; text-decoration: none; }
+  .article-card a:hover { text-decoration: underline; }
+
+  .recent-notes {
+    max-width: 620px;
+    margin: 32px auto 0;
+    padding: 0;
+    list-style: none;
   }
-  .newsletter-note {
-    margin-top: 10px;
-    font-size: 12px;
-    color: var(--color-text-secondary);
+  .recent-notes li { border-top: 0.5px solid #e4ddce; }
+  .recent-notes a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 18px;
+    padding: 16px 4px;
+    color: var(--home-ink);
+    text-decoration: none;
+  }
+  .recent-notes a:hover .rn-title { color: var(--home-blue-text); text-decoration: underline; }
+  .rn-title { font-size: 16px; line-height: 1.7; }
+  .rn-date { flex: 0 0 auto; font-size: 14px; color: var(--home-ink-soft); font-variant-numeric: tabular-nums; }
+
+  /* ---- News ---- */
+  .news { background: var(--home-white); }
+  .news-list { max-width: 640px; margin: 0 auto; }
+  .news-item {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    padding: 20px 4px;
+    border-bottom: 0.5px solid #e4ddce;
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-date {
+    flex: 0 0 auto;
+    font-size: 14px;
+    color: var(--home-ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .news-title { font-size: 18px; line-height: 1.8; color: var(--home-ink); }
+  .news-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--home-blue-text);
+    border: 1px solid var(--home-blue-text);
+    border-radius: 999px;
+    padding: 1px 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---- Contact ---- */
+  .contact { background: var(--home-navy); padding: 96px 0; }
+  .contact :global(.eyebrow) { color: var(--home-mist-on-navy); }
+  .contact :global(.section-title) { color: var(--home-cream-on-navy); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .contact-card {
+    background: rgba(247,242,229,0.06);
+    border: 0.5px solid rgba(247,242,229,0.22);
+    border-radius: 20px;
+    padding: 36px 30px;
+    text-align: center;
+  }
+  .contact-card h3 { color: var(--home-cream-on-navy); font-size: 19px; font-weight: 600; margin: 0 0 12px; }
+  .contact-card p { color: var(--home-mist-on-navy); font-size: 18px; line-height: 1.9; margin: 0 0 20px; }
+  .contact-card .cta { font-size: 16px; padding: 12px 34px; }
+  .contact-card .quiet {
+    display: inline-block;
+    color: var(--home-mist-on-navy);
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid rgba(184,198,212,0.6);
+    border-radius: 999px;
+    padding: 11px 32px;
+  }
+  .contact-card .quiet:hover,
+  .contact-card .quiet:focus-visible {
+    color: var(--home-cream-on-navy);
+    border-color: var(--home-cream-on-navy);
   }
 
   /* ---- Responsive ---- */
   @media (max-width: 640px) {
-    .hero { padding: 32px 0 8px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-    .hero-photo { width: 120px; height: 120px; order: -1; }
-    .hero-text { font-size: 21px; line-height: 1.7; }
-
-    section.block { padding-top: 72px; }
-
-    .skills { grid-template-columns: 1fr; }
-
-    .note-link { grid-template-columns: 1fr; gap: 4px; }
-    .note-date { order: -1; }
+    .hero { padding: 80px 24px 72px; }
+    main :global(section) { padding: 64px 0; }
+    .stats { gap: 36px; }
   }
 </style>
-
-<script>
-  const form = document.querySelector('.newsletter-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button');
-    if (btn) btn.textContent = 'ありがとうございます';
-  });
-</script>

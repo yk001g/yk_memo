@@ -27,6 +27,25 @@
   --font-sans: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont,
     "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* ----------------------------------------------------------------
+     Homepage tokens (DESIGN.md v0.2 — ヒーロー/フッター限定のネイビー拡張)
+     yk_memo-hp-phase2-claude-code-brief-v1.0.md §3, §4 準拠。
+     トップページ（HomeLayout / index.astro）専用。既存ブログ側トークンは変更しない。
+     ---------------------------------------------------------------- */
+  --home-navy: #16324f;
+  --home-navy-deep: #0e2a45;
+  --home-blue: #1d73be;
+  /* テキスト用途の青は #1d73be だと F7F2E5 上で 4.42:1 となり WCAG AA(4.5:1)に届かないため、
+     文字色としてはこの少し濃いシェードを使う（ボーダー/装飾には --home-blue を使用可）。 */
+  --home-blue-text: #185f9c;
+  --home-yellow: #fbd212;
+  --home-cream: #F7F2E5;
+  --home-white: #ffffff;
+  --home-ink: #1a1a1a;
+  --home-ink-soft: #4a473f;
+  --home-cream-on-navy: #F7F2E5;
+  --home-mist-on-navy: #b8c6d4;
 }
 
 /* ================================================================
@@ -34,7 +53,10 @@
    ================================================================ */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 /* ================================================================
    Base

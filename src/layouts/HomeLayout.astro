@@ -1,0 +1,170 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = 'yk_memoは、東京・八王子で「AIに考えさせず、自分の思考を拡張する」使い方を伝え続ける、個人のAIリテラシー教育活動です。毎月のスマホ・わいわいサロン、市民講座、5つのAIサービスを比較実践するICT研究会——組織ではなく一人の実践者が、自分で試したことだけを、地域とオンラインの両方に発信しています。',
+  image,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImageURL = image && Astro.site
+  ? new URL(`${base}${image}`, Astro.site).href
+  : undefined;
+
+const navItems = [
+  { label: '想い', href: '#about' },
+  { label: '活動', href: '#activities' },
+  { label: '発信', href: '#blog' },
+  { label: 'お知らせ', href: '#news' },
+] as const;
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="yk_memo" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {canonicalURL && <meta property="og:url" content={canonicalURL} />}
+  {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+  {ogImageURL && <meta property="og:image:width" content="1200" />}
+  {ogImageURL && <meta property="og:image:height" content="630" />}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  <link rel="icon" type="image/x-icon" href={`${base}favicon.ico`} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="home">
+
+<header class="home-header">
+  <nav class="home-nav" aria-label="メイン">
+    <a href={base} class="home-logo">yk_memo</a>
+    <ul>
+      {navItems.map(({ label, href }) => (
+        <li><a href={href}>{label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<slot />
+
+<footer class="home-footer">
+  <p class="home-footer-name">yk_memo — 八王子・片倉台</p>
+  <p class="home-footer-links">
+    <a href="#">プライバシーポリシー</a><a href="#">X（旧Twitter）</a><a href={`${base}notes/`}>ブログ</a>
+  </p>
+</footer>
+
+</body>
+</html>
+
+<style is:global>
+  .home {
+    font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", var(--font-sans);
+    color: var(--home-ink);
+    background: var(--home-cream);
+    line-height: 1.9;
+    font-size: 18px;
+  }
+  .home .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .home-header {
+    background: var(--home-navy);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .home-nav {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .home-logo {
+    color: var(--home-cream-on-navy);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .home-logo:hover { text-decoration: none; }
+  .home-nav ul {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .home-nav a {
+    color: var(--home-mist-on-navy);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .home-nav ul a:hover,
+  .home-nav ul a:focus-visible {
+    color: var(--home-cream-on-navy);
+  }
+
+  .home-footer {
+    background: var(--home-navy-deep);
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .home-footer-name {
+    color: var(--home-cream-on-navy);
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+  .home-footer-links {
+    color: var(--home-mist-on-navy);
+    font-size: 14px;
+    margin: 0;
+  }
+  .home-footer-links a {
+    color: var(--home-mist-on-navy);
+    text-decoration: none;
+    margin: 0 12px;
+  }
+  .home-footer-links a:hover,
+  .home-footer-links a:focus-visible {
+    color: var(--home-cream-on-navy);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .home-nav ul { display: none; }
+  }
+</style>
