@@ -5,8 +5,10 @@ import { Image } from 'astro:assets';
 import portraitPlaceholder from '../assets/home/portrait-placeholder.jpg';
 import schedule from '../data/schedule.json';
 
+const featuredSlug = 'fable5-vs-gpt56-comparison';
+
 const recentNotes = (await getCollection('notes'))
-  .filter((e) => e.data.status === 'published')
+  .filter((e) => e.data.status === 'published' && e.id !== featuredSlug)
   .sort((a, b) => b.data.date.localeCompare(a.data.date))
   .slice(0, 3);
 ---
@@ -170,7 +172,7 @@ const recentNotes = (await getCollection('notes'))
         <p class="kicker">代表記事</p>
         <h3>AIに考えさせるな</h3>
         <p>AIは答えを出す機械ではなく、考えを広げる道具——その使い方を、毎月の現場での実践から書いています。</p>
-        <a href="#">読んでみる ›</a>
+        <a href={`/notes/${featuredSlug}/`}>読んでみる ›</a>
       </div>
       {recentNotes.length > 0 && (
         <ul class="recent-notes">
