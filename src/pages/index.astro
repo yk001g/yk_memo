@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import portraitPlaceholder from '../assets/home/portrait-placeholder.jpg';
 import schedule from '../data/schedule.json';
 
-const featuredSlug = 'fable5-vs-gpt56-comparison';
+const featuredSlug = 'ai-thinking-extension';
 
 const recentNotes = (await getCollection('notes'))
   .filter((e) => e.data.status === 'published' && e.id !== featuredSlug)
