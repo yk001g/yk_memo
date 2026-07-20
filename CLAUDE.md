@@ -24,7 +24,7 @@
 |---|---|
 | フレームワーク | Astro（content collections使用） |
 | デプロイ先 | Vercel（GitHub連携で自動デプロイ） |
-| ローカルパス | `/Volumes/Data-yk1/書類２/Projects/yk_memo`（外部SSD） |
+| ローカルパス | `/Volumes/Data-yk1/書類２/projects/ykmemo-homepage/yk_memo`（外部SSD） |
 | GitHubリポジトリ | `https://github.com/yk001g/yk_memo` |
 | 公開URL | `https://yk-memo.vercel.app` |
 | 記事配置先 | `src/content/notes/<slug>.md`（ファイル単独パターン） |
